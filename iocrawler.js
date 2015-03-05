@@ -20,6 +20,7 @@ function getLinker(pagina, linker) {
         res.on('data', function (chunk) {
             ///////////////////////////////Obtener el siguiente link con un ciclo///////////////////////
             var lector = new Lector(chunk);
+            io.send(lector);
             while (lector.lastIndex < lector.links.length) {
                 var link = lector.getLink();
                 if (linker[link] == undefined) {
