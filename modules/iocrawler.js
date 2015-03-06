@@ -5,7 +5,7 @@ var io = require("socket.io")();
 var http = require("http");
 
 var options = {
-    hostname: 'www.facebook.com'
+    hostname: 'www.informador.com.mx'
 };
 
 io.on("connection", function (socket) {
@@ -15,8 +15,8 @@ io.on("connection", function (socket) {
 function getLinker(pagina, linker) {
     console.log("Haciendo peticion a: " + pagina);
     var req = http.request(options, function (res) {
-        console.log("Haciendo peticion");
         res.setEncoding('utf8');
+        console.log("Despues de utf8", res.);
         res.on('data', function (chunk) {
             ///////////////////////////////Obtener el siguiente link con un ciclo///////////////////////
             var lector = new Lector(chunk);
@@ -27,10 +27,11 @@ function getLinker(pagina, linker) {
                     linker[link] = link;
                 }
             }
+            console.log("recivido el data");
         });
-
+        console.log("terminado la fun");
     });
-
+    console.log("terminado el req");
     req.end();
 
     //Si el link no lo habia leido antes,crear nuevos niveles dependiendo del link
